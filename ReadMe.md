@@ -1,6 +1,5 @@
 # MyNotes (Capstone Project)
 
-
 ## Description
 MyNotes  is an application that allows users to keep important records or create tasks.
 The record created can be modified, tasks can also be checked as done.
@@ -30,3 +29,4 @@ This only occurs when user wants to sync his data.
 
 
 ## User Interface Mocks
+![image](https://user-images.githubusercontent.com/19291341/71538260-461da500-2928-11ea-8311-4e83e6bb01f4.png)

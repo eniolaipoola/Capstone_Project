@@ -9,21 +9,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
-            android:name=".HomeActivity"
-            android:label="@string/title_activity_home"></activity>
+            android:name=".activities.DashboardActivity"
+            android:label="@string/title_activity_home">
+
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.VIEW" />
+            </intent-filter>
+
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-4804094542707781~1005662974" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action
+                    android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
