@@ -30,3 +30,4 @@ This only occurs when user wants to sync his data.
 
 
 ## User Interface Mocks
+![image](https://user-images.githubusercontent.com/19291341/71538240-defff080-2927-11ea-83dd-8f49f20c9db6.png)
