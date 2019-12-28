@@ -2,11 +2,13 @@
     <string name="app_name">MyNotes</string>
     <string name="note_icon_image">Splash Screen Image</string>
     <string name="title_activity_home">HomeActivity</string>
+
     <string name="title_home">Home</string>
     <string name="title_notes">Note</string>
     <string name="title_tasks">Task</string>
     <string name="title_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_add">Add New Note</string>
+
+
 </resources>

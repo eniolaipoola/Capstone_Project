@@ -21,6 +21,17 @@
             android:textAppearance="?android:textAppearanceMedium"
             android:textSize="24sp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/share_fab"
+            android:background="@drawable/add_fab_background"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@drawable/ic_add"
+            android:layout_margin="@dimen/fab_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:elevation="@dimen/fab_elevation"
+            android:contentDescription="@string/action_add" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
