@@ -9,6 +9,8 @@
     <string name="title_settings">Settings</string>
 
     <string name="action_add">Add New Note</string>
-
+    <string name="title_activity_create_note">Create Note</string>
+    <string name="note_title">Enter Note Title</string>
+    <string name="note_created_date">Note Created Date</string>
 
 </resources>

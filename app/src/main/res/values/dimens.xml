@@ -8,4 +8,16 @@
 
     <dimen name="fab_elevation">6dp</dimen>
     <dimen name="fab_margin">32dp</dimen>
+
+    <!--Card specific Dimensions-->
+    <dimen name="card_spacing">4dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="card_corner_radius">8dp</dimen>
+    <dimen name="card_checked_icon">24dp</dimen>
+    <dimen name="card_checked_icon_margin">8dp</dimen>
+    <dimen name="card_primary_title_top_padding">24dp</dimen>
+    <dimen name="card_secondary_text_top_bottom_padding">16dp</dimen>
+    <dimen name="card_left_right_padding">16dp</dimen>
+    <dimen name="framelayout_height">70dp</dimen>
+    <dimen name="frame_elevation">4dp</dimen>
 </resources>

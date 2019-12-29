@@ -9,29 +9,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
-            android:name=".activities.DashboardActivity"
+            android:name=".ui.CreateNoteActivity"
+            android:label="@string/title_activity_create_note"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.DashboardActivity"
             android:label="@string/title_activity_home">
-
             <intent-filter>
-                <action
-                    android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW" />
             </intent-filter>
-
         </activity>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-4804094542707781~1005662974" />
+            android:value="ca-app-pub-4804094542707781~1103551078" />
 
-        <activity android:name=".activities.MainActivity">
+        <activity
+            android:name=".ui.MainActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
             <intent-filter>
-                <action
-                    android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

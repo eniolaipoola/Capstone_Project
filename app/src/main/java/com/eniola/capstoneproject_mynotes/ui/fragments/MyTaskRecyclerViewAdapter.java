@@ -1,4 +1,4 @@
-package com.eniola.capstoneproject_mynotes.fragments;
+package com.eniola.capstoneproject_mynotes.ui.fragments;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.eniola.capstoneproject_mynotes.R;
-import com.eniola.capstoneproject_mynotes.fragments.TaskFragment.OnListFragmentInteractionListener;
-import com.eniola.capstoneproject_mynotes.fragments.dummy.DummyContent.DummyItem;
+import com.eniola.capstoneproject_mynotes.ui.fragments.TaskFragment.OnListFragmentInteractionListener;
+import com.eniola.capstoneproject_mynotes.ui.fragments.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 

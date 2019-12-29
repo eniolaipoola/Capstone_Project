@@ -1,4 +1,4 @@
-package com.eniola.capstoneproject_mynotes.activities;
+package com.eniola.capstoneproject_mynotes.ui;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,10 +10,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentTransaction;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.ActivityDashboardBinding;
-import com.eniola.capstoneproject_mynotes.fragments.NoteFragment;
-import com.eniola.capstoneproject_mynotes.fragments.SettingsFragment;
-import com.eniola.capstoneproject_mynotes.fragments.TaskFragment;
-import com.eniola.capstoneproject_mynotes.fragments.dummy.DummyContent;
+import com.eniola.capstoneproject_mynotes.ui.fragments.NoteFragment;
+import com.eniola.capstoneproject_mynotes.ui.fragments.SettingsFragment;
+import com.eniola.capstoneproject_mynotes.ui.fragments.TaskFragment;
+import com.eniola.capstoneproject_mynotes.ui.fragments.dummy.DummyContent;
 import com.eniola.capstoneproject_mynotes.free.HomeFragment;
 import com.eniola.capstoneproject_mynotes.utilities.AppConstant;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

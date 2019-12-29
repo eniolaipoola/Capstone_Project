@@ -1,4 +1,4 @@
-package com.eniola.capstoneproject_mynotes.fragments;
+package com.eniola.capstoneproject_mynotes.ui.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -14,8 +14,8 @@ import com.eniola.capstoneproject_mynotes.databinding.FragmentSettingsBinding;
 
 public class SettingsFragment extends Fragment {
 
-    private OnFragmentInteractionListener mListener;
-    private FragmentSettingsBinding fragmentSettingsBinding;
+    public OnFragmentInteractionListener mListener;
+    public FragmentSettingsBinding fragmentSettingsBinding;
 
     public SettingsFragment() {}
 
