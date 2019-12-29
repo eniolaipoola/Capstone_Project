@@ -6,10 +6,12 @@ import com.eniola.capstoneproject_mynotes.Notes;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.ActivityCreateNoteBinding;
 import com.eniola.capstoneproject_mynotes.utilities.AppConstant;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
@@ -21,7 +23,9 @@ import java.util.Date;
 public class CreateNoteActivity extends AppCompatActivity {
 
     ActivityCreateNoteBinding activityCreateNoteBinding;
-    String noteTitleEditText, noteContentEditText, noteCreatedDateTime;
+    String noteTitle;
+    String noteContent;
+    String noteCreatedDateTime;
 
     //Start using the database
     private FirebaseDatabase mFirebaseDatabase;
@@ -31,32 +35,32 @@ public class CreateNoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityCreateNoteBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_note);
-
         Toolbar toolbar = activityCreateNoteBinding.toolbar;
         setSupportActionBar(toolbar);
 
-        //save current time and date as note creation time
+        //get current time and date and display as note creation time
         noteCreatedDateTime = DateFormat.getDateTimeInstance().format(new Date());
         activityCreateNoteBinding.createdDateTextView.setText(noteCreatedDateTime);
 
-        //get note title and content
-        noteTitleEditText = activityCreateNoteBinding.noteTitle.getText().toString();
-        noteContentEditText = activityCreateNoteBinding.noteContentEditText.getText().toString();
-
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
 
         FloatingActionButton fab = activityCreateNoteBinding.fab;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                //save note data in firebase
-
-
-                Log.d(AppConstant.DEBUG_TAG, "note title is " + noteTitleEditText);
-                Log.d(AppConstant.DEBUG_TAG, "note content is " + noteContentEditText);
+                //get note title and content
+                noteTitle = activityCreateNoteBinding.noteTitle.getText().toString();
+                noteContent = activityCreateNoteBinding.noteContentEditText.getText().toString();
+                Log.d(AppConstant.DEBUG_TAG, "note title is " + noteTitle);
+                Log.d(AppConstant.DEBUG_TAG, "note content is " + noteContent);
                 Log.d(AppConstant.DEBUG_TAG, "note created date is " + noteCreatedDateTime);
-                writeNewNote(noteTitleEditText, new  Date(noteCreatedDateTime), noteCreatedDateTime);
+
+                //fire up firebase instance
+                mFirebaseDatabase = FirebaseDatabase.getInstance();
+                mDatabaseReference = mFirebaseDatabase.getReference().child("notes");
+
+                //attempt to save note data to firebase database
+                writeNewNote(noteTitle, noteCreatedDateTime, noteContent);
 
                 //save received data in firebase
 
@@ -67,9 +71,19 @@ public class CreateNoteActivity extends AppCompatActivity {
         });
     }
 
-    private void writeNewNote(String title, Date date_created, String content){
+    private void writeNewNote(String title, String date_created, String content){
         Notes notes = new Notes(title, date_created, content);
-        mFirebaseDatabase.getReference().child("notes").setValue(notes);
+        mDatabaseReference.child("notes").setValue(notes).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(AppConstant.DEBUG_TAG, "The saving of data to firebase is successful");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(AppConstant.DEBUG_TAG, "The saving of data to firebase failed");
+            }
+        });
     }
 
 }
