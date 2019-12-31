@@ -1,8 +1,8 @@
 package com.eniola.capstoneproject_mynotes.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import com.eniola.capstoneproject_mynotes.Notes;
+import com.eniola.capstoneproject_mynotes.models.Notes;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.ActivityCreateNoteBinding;
 import com.eniola.capstoneproject_mynotes.utilities.AppConstant;
@@ -51,29 +51,24 @@ public class CreateNoteActivity extends AppCompatActivity {
                 //get note title and content
                 noteTitle = activityCreateNoteBinding.noteTitle.getText().toString();
                 noteContent = activityCreateNoteBinding.noteContentEditText.getText().toString();
-                Log.d(AppConstant.DEBUG_TAG, "note title is " + noteTitle);
-                Log.d(AppConstant.DEBUG_TAG, "note content is " + noteContent);
-                Log.d(AppConstant.DEBUG_TAG, "note created date is " + noteCreatedDateTime);
 
                 //fire up firebase instance
                 mFirebaseDatabase = FirebaseDatabase.getInstance();
-                mDatabaseReference = mFirebaseDatabase.getReference().child("notes");
+                mDatabaseReference = mFirebaseDatabase.getReference();
 
                 //attempt to save note data to firebase database
                 writeNewNote(noteTitle, noteCreatedDateTime, noteContent);
 
-                //save received data in firebase
-
-                //retrieve received data from firebase
-
-
+                //Go back to home page
+                Intent intent = new Intent(CreateNoteActivity.this, DashboardActivity.class);
+                startActivity(intent);
             }
         });
     }
 
     private void writeNewNote(String title, String date_created, String content){
         Notes notes = new Notes(title, date_created, content);
-        mDatabaseReference.child("notes").setValue(notes).addOnSuccessListener(new OnSuccessListener<Void>() {
+        mDatabaseReference.child("notes").push().setValue(notes).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.d(AppConstant.DEBUG_TAG, "The saving of data to firebase is successful");

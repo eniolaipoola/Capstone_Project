@@ -11,6 +11,12 @@
     <string name="action_add">Add New Note</string>
     <string name="title_activity_create_note">Create Note</string>
     <string name="note_title">Enter Note Title</string>
+    <string name="note_title_text_view">Note Title</string>
+    <string name="note_content">Content</string>
     <string name="note_created_date">Note Created Date</string>
+    <string name="view_notes">View Notes</string>
+
+    <!--Tasks related strings-->
+    <string name="view_tasks">View Tasks</string>
 
 </resources>
