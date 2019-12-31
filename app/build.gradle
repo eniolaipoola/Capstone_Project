@@ -53,6 +53,7 @@ dependencies {
 
     //################################ Google Play Services#########################################
     implementation 'com.google.android.gms:play-services-ads:18.3.0'
+    implementation 'com.google.firebase:firebase-analytics:17.2.1'
     implementation 'com.google.firebase:firebase-database:19.2.0'
 
     //####################### Admob Dependency#########################################

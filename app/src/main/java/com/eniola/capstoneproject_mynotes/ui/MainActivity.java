@@ -1,4 +1,4 @@
-package com.eniola.capstoneproject_mynotes.activities;
+package com.eniola.capstoneproject_mynotes.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;

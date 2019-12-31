@@ -1,4 +1,4 @@
-package com.eniola.capstoneproject_mynotes.fragments;
+package com.eniola.capstoneproject_mynotes.ui.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,14 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.FragmentTaskListBinding;
-import com.eniola.capstoneproject_mynotes.fragments.dummy.DummyContent;
-import com.eniola.capstoneproject_mynotes.fragments.dummy.DummyContent.DummyItem;
+import com.eniola.capstoneproject_mynotes.ui.fragments.dummy.DummyContent;
+import com.eniola.capstoneproject_mynotes.ui.fragments.dummy.DummyContent.DummyItem;
 
 public class TaskFragment extends Fragment {
 
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
-    private FragmentTaskListBinding taskListBinding;
+    public OnListFragmentInteractionListener mListener;
+    public FragmentTaskListBinding taskListBinding;
 
     public TaskFragment() {}
 
