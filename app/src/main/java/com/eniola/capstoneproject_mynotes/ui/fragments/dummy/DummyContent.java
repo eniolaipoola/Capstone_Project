@@ -1,4 +1,4 @@
-package com.eniola.capstoneproject_mynotes.fragments.dummy;
+package com.eniola.capstoneproject_mynotes.ui.fragments.dummy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
