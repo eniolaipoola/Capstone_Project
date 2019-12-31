@@ -1,27 +1,27 @@
-package com.eniola.capstoneproject_mynotes.ui.fragments;
+package com.eniola.capstoneproject_mynotes.ui.adapters;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.ui.fragments.TaskFragment.OnListFragmentInteractionListener;
 import com.eniola.capstoneproject_mynotes.ui.fragments.dummy.DummyContent.DummyItem;
-
 import java.util.List;
 
-public class MyTaskRecyclerViewAdapter extends RecyclerView.Adapter<MyTaskRecyclerViewAdapter.ViewHolder> {
+public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyTaskRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public TaskAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
 
     @Override
+    @NonNull
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_task, parent, false);
@@ -31,8 +31,6 @@ public class MyTaskRecyclerViewAdapter extends RecyclerView.Adapter<MyTaskRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        //holder.mIdView.setText(mValues.get(position).id);
-        //holder.mContentView.setText(mValues.get(position).content);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
