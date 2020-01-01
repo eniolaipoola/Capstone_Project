@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.eniola.capstoneproject_mynotes.models.Notes;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.FragmentNoteBinding;
+import com.eniola.capstoneproject_mynotes.ui.CreateNoteActivity;
 import com.eniola.capstoneproject_mynotes.ui.adapters.NotesAdapter;
 import com.eniola.capstoneproject_mynotes.utilities.AppConstant;
 import com.google.firebase.database.DataSnapshot;

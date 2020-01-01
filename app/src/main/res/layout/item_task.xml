@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite">
+
+    <CheckBox
+        android:id="@+id/task_status"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/task_list_item"
+        android:gravity="center"
+        android:layout_margin="16dp"
+        android:textAppearance="?android:textAppearanceMedium"/>
 
 </LinearLayout>

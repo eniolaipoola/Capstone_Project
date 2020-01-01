@@ -18,5 +18,8 @@
 
     <!--Tasks related strings-->
     <string name="view_tasks">View Tasks</string>
+    <string name="task_title">Task Title</string>
+    <string name="create_task">Create Task</string>
+    <string name="task_list_item">Task Details</string>
 
 </resources>
