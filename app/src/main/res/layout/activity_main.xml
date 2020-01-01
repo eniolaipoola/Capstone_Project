@@ -8,7 +8,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorGrey"
         tools:context=".ui.MainActivity">
 
         <com.google.android.material.card.MaterialCardView
@@ -49,6 +48,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:textStyle="italic"
             android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/colorPrimary"
             app:layout_constraintTop_toBottomOf="@id/note_splash_screen_image_view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

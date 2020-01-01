@@ -57,7 +57,15 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.2.0'
 
     //####################### Admob Dependency#########################################
-    freeImplementation 'com.google.android.gms:play-services-ads:18.3.0'
+    implementation 'com.google.android.gms:play-services-ads:18.3.0'
+
+    //#################### Room Database Dependency######################//
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+
+    //########################### LiveData and ViewModel##############################//
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    annotationProcessor "android.arch.lifecycle:common-java8:1.1.1"
 }
 
 

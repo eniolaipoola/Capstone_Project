@@ -90,7 +90,7 @@ public class NoteFragment extends Fragment {
         return new NoteFragment();
     }
 
-    public static int calculateNumberOfColumns(Context context){
+    private static int calculateNumberOfColumns(Context context){
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
         int scalingFactor = 200;

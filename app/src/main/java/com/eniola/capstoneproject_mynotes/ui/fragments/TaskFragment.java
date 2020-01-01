@@ -1,7 +1,9 @@
 package com.eniola.capstoneproject_mynotes.ui.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -11,34 +13,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.eniola.capstoneproject_mynotes.R;
-import com.eniola.capstoneproject_mynotes.databinding.FragmentTaskListBinding;
+import com.eniola.capstoneproject_mynotes.databinding.FragmentTaskBinding;
+import com.eniola.capstoneproject_mynotes.ui.CreateTaskActivity;
+import com.eniola.capstoneproject_mynotes.ui.adapters.TaskAdapter;
 import com.eniola.capstoneproject_mynotes.ui.fragments.dummy.DummyContent;
 import com.eniola.capstoneproject_mynotes.ui.fragments.dummy.DummyContent.DummyItem;
 
 public class TaskFragment extends Fragment {
 
     private int mColumnCount = 1;
-    public OnListFragmentInteractionListener mListener;
-    public FragmentTaskListBinding taskListBinding;
+    private OnListFragmentInteractionListener mListener;
+    private FragmentTaskBinding fragmentTaskBinding;
 
     public TaskFragment() {}
 
     public static TaskFragment newInstance(){
         return new TaskFragment();
-
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        taskListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_task_list, container, false);
-        View view = taskListBinding.getRoot();
+        fragmentTaskBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_task, container, false);
+        View view = fragmentTaskBinding.getRoot();
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -49,14 +51,23 @@ public class TaskFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyTaskRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new TaskAdapter(DummyContent.ITEMS, mListener));
         }
+
+        fragmentTaskBinding.createNewTaskFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CreateTaskActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnListFragmentInteractionListener) {
             mListener = (OnListFragmentInteractionListener) context;
