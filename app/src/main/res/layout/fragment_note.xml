@@ -4,13 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/notes_text_view"
@@ -38,10 +34,9 @@
                 android:layout_height="56dp"
                 android:src="@drawable/ic_add"
                 android:layout_margin="@dimen/fab_margin"
-                app:layout_constraintTop_toBottomOf="@+id/home_note_recycler_view"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:elevation="@dimen/fab_elevation"
                 android:contentDescription="@string/action_add" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
 </layout>

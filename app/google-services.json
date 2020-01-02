@@ -1,3 +1,4 @@
+
 {
   "project_info": {
     "project_number": "178424287113",
@@ -8,9 +9,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:178424287113:android:6889c14d0d66d929bedb58",
+        "mobilesdk_app_id": "1:178424287113:android:f5b563fc177e3ab8bedb58",
         "android_client_info": {
-          "package_name": "com.eniola.capstoneproject_mynotes.paid"
+          "package_name": "com.eniola.capstoneproject_mynotes"
         }
       },
       "oauth_client": [

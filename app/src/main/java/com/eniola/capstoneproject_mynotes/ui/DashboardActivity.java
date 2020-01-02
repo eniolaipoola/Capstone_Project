@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.ActivityDashboardBinding;
 import com.eniola.capstoneproject_mynotes.ui.fragments.NoteFragment;
-import com.eniola.capstoneproject_mynotes.free.HomeFragment;
+import com.eniola.capstoneproject_mynotes.ui.fragments.HomeFragment;
 import com.eniola.capstoneproject_mynotes.ui.fragments.SettingsFragment;
 import com.eniola.capstoneproject_mynotes.ui.fragments.TaskFragment;
 import com.eniola.capstoneproject_mynotes.ui.fragments.dummy.DummyContent;
@@ -112,4 +112,9 @@ public class DashboardActivity extends AppCompatActivity  implements BottomNavig
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
 
     }
+
+    /*public String getDeviceId(){
+        TelephonyManager telephonyManager = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+        String deviceId = telephonyManager.getDeviceId();
+    }*/
 }

@@ -18,17 +18,6 @@ android {
         }
     }
 
-    flavorDimensions("version")
-    productFlavors {
-        free {
-            dimension "version"
-            applicationId "com.eniola.capstoneproject_mynotes.free"
-        }
-        paid {
-            dimension "version"
-            applicationId "com.eniola.capstoneproject_mynotes.paid"
-        }
-    }
 
     dataBinding.enabled = true
 }
@@ -52,12 +41,11 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
 
     //################################ Google Play Services#########################################
-    implementation 'com.google.android.gms:play-services-ads:18.3.0'
     implementation 'com.google.firebase:firebase-analytics:17.2.1'
     implementation 'com.google.firebase:firebase-database:19.2.0'
+    implementation 'com.firebaseui:firebase-ui-auth:6.2.0'
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
 
-    //####################### Admob Dependency#########################################
-    implementation 'com.google.android.gms:play-services-ads:18.3.0'
 
     //#################### Room Database Dependency######################//
     implementation "android.arch.persistence.room:runtime:1.1.1"
