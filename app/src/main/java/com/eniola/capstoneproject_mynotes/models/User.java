@@ -1,7 +1,6 @@
 package com.eniola.capstoneproject_mynotes.models;
 
 import android.content.Context;
-
 import com.eniola.capstoneproject_mynotes.utilities.AppConstant;
 import com.eniola.capstoneproject_mynotes.utilities.SharedPreferenceBaseClass;
 

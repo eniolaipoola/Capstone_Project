@@ -52,6 +52,8 @@ public class NoteFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     notes = snapshot.getValue(Notes.class);
+                    String noteId = dataSnapshot.getKey();
+                    notes.setId(noteId);
                     if(notes != null){
                         notesFromFirebase.add(notes);
                         notesAdapter = new NotesAdapter(notesFromFirebase, getActivity());

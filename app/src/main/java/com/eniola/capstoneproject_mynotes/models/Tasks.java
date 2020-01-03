@@ -5,22 +5,24 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class Tasks {
 
-    private int id;
+    private String id;
     private String status;
     private String description;
+    private String username;
 
-
-    public Tasks(int id, String description, String status){
-        this.id = id;
+    public Tasks(String username, String description, String status){
         this.status = status;
         this.description = description;
+        this.username = username;
     }
 
-    public int getId() {
+    public Tasks(){}
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -38,5 +40,13 @@ public class Tasks {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

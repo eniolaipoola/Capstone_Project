@@ -17,7 +17,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
     private List<Notes> allNotes;
     private OnNoteClickedListener onNoteClickedListener;
-    Context mContext;
+    private Context mContext;
 
     public NotesAdapter(List<Notes> firebaseNotes, Context context){
         this.allNotes = firebaseNotes;
@@ -55,6 +55,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
         private void bindDataToView(final Notes notes, final OnNoteClickedListener noteClickedListener){
             String title = notes.getTitle();
+            String note_id = notes.getId();
             String date_created = notes.getDate_created();
             String content = notes.getContent();
 

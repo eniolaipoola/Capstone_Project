@@ -19,7 +19,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentTransaction;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import java.text.DateFormat;
@@ -34,6 +33,7 @@ public class CreateNoteActivity extends AppCompatActivity {
     SharedPreferenceBaseClass sharedPreferenceBaseClass;
     FloatingActionButton floatingActionButton;
     Notes notes;
+    String username;
 
     //Start using the database
     private FirebaseDatabase mFirebaseDatabase;
@@ -48,7 +48,7 @@ public class CreateNoteActivity extends AppCompatActivity {
 
         floatingActionButton = activityCreateNoteBinding.fab;
         sharedPreferenceBaseClass = new SharedPreferenceBaseClass(this);
-        final String username = sharedPreferenceBaseClass.loadPreference(AppConstant.APP_MAIN_PREFERENCE).getString(AppConstant.USERNAME, "");
+        username = sharedPreferenceBaseClass.loadPreference(AppConstant.APP_MAIN_PREFERENCE).getString(AppConstant.USERNAME, "");
         //fire up firebase instance
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference();
@@ -66,7 +66,7 @@ public class CreateNoteActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         //update note details
-                        updateCurrentNote(username, notes.getTitle(), notes.getContent(), notes.getDate_created());
+                        updateCurrentNote(notes);
                         //Go back to note fragment page
                         getNoteFragment();
                     }
@@ -79,12 +79,11 @@ public class CreateNoteActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 //get note title and content
                 noteTitle = activityCreateNoteBinding.noteTitle.getText().toString();
                 noteContent = activityCreateNoteBinding.noteContentEditText.getText().toString();
 
-                //attempt to save note data to firebase database
+                //attempt to save note data to fire-base database
                 writeNewNote(username, noteTitle, noteCreatedDateTime, noteContent);
 
                 //Go back to home page
@@ -110,13 +109,10 @@ public class CreateNoteActivity extends AppCompatActivity {
         });
     }
 
-    private void updateCurrentNote(String username, String title, String noteContent, final String dateCreated){
-        mDatabaseReference = mFirebaseDatabase.getReference("notes");
-        String key = mDatabaseReference.child("notes").child(username).push().getKey();
-        if(key != null){
-            mDatabaseReference.child("notes").child(username).child(key).child("title").setValue(title);
-            mDatabaseReference.child("notes").child(username).child(key).child("content").setValue(noteContent);
-            mDatabaseReference.child("notes").child(username).child(key).child("date_created").setValue(dateCreated);
+    private void updateCurrentNote(Notes notes){
+        String currentNoteId = notes.getId();
+        if(currentNoteId != null){
+            mDatabaseReference.child("notes").child(username).setValue(notes);
         }
     }
 
@@ -125,15 +121,5 @@ public class CreateNoteActivity extends AppCompatActivity {
         NoteFragment noteFragment = NoteFragment.newInstance();
         fragmentTransaction.replace(R.id.fragment_container, noteFragment).addToBackStack(null);
         fragmentTransaction.commit();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            /*case android.R.id.home:
-                onBackPressed();
-                return true;*/
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

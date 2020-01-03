@@ -13,8 +13,17 @@ public class Notes implements Serializable {
     private String date_created;
     private String content;
     private String userEmail;
+    private String id;
 
     public Notes(){}
+
+    public Notes(String noteId, String userEmail, String title, String content, String date_created){
+        this.id = noteId;
+        this.title = title;
+        this.date_created = date_created;
+        this.content = content;
+        this.userEmail = userEmail;
+    }
 
     public Notes(String userEmail, String title, String content, String date_created){
         this.title = title;
@@ -64,5 +73,13 @@ public class Notes implements Serializable {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

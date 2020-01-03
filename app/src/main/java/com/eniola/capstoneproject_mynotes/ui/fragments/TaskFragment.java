@@ -9,18 +9,32 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.FragmentTaskBinding;
+import com.eniola.capstoneproject_mynotes.models.Tasks;
 import com.eniola.capstoneproject_mynotes.ui.CreateTaskActivity;
+import com.eniola.capstoneproject_mynotes.ui.adapters.TaskAdapter;
 import com.eniola.capstoneproject_mynotes.utilities.AppConstant;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import java.util.ArrayList;
 
 public class TaskFragment extends Fragment {
 
     private int mColumnCount = 1;
+    Tasks tasks;
+    private ArrayList<Tasks> tasksFromFirebase;
+    private TaskAdapter taskAdapter;
+
     public TaskFragment() {}
 
     public static TaskFragment newInstance(){
@@ -35,7 +49,8 @@ public class TaskFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentTaskBinding fragmentTaskBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_task, container, false);
+        final FragmentTaskBinding fragmentTaskBinding = DataBindingUtil.inflate(inflater,
+                R.layout.fragment_task, container, false);
         View view = fragmentTaskBinding.getRoot();
 
         //fetch bundle details
@@ -44,16 +59,35 @@ public class TaskFragment extends Fragment {
             Log.d(AppConstant.DEBUG_TAG, "task retrieved in task fragment is " + taskDescription);
         }
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+        //retrieve users specific saved notes, if any
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference().child("tasks");
+        tasksFromFirebase = new ArrayList<>();
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    tasks = snapshot.getValue(Tasks.class);
+                    if(tasks != null){
+                        tasksFromFirebase.add(tasks);
+                        taskAdapter = new TaskAdapter(tasksFromFirebase);
+                        taskAdapter.notifyDataSetChanged();
+                        //add data to recycler-view adapter
+                        fragmentTaskBinding.homeTaskRecyclerView.setAdapter(taskAdapter);
+                    }
+                }
             }
-        }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(AppConstant.DEBUG_TAG, "An error occurred when trying to fetch data from firebase " + tasksFromFirebase.size());
+            }
+        });
+
+        //bind recycler-view to view
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        fragmentTaskBinding.homeTaskRecyclerView.setLayoutManager(linearLayoutManager);
+        fragmentTaskBinding.homeTaskRecyclerView.setHasFixedSize(true);
 
         fragmentTaskBinding.createNewTaskFab.setOnClickListener(new View.OnClickListener() {
             @Override
