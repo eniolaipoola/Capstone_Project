@@ -2,21 +2,18 @@ package com.eniola.capstoneproject_mynotes.models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
-import java.util.List;
-
 @IgnoreExtraProperties
 public class Tasks {
 
-    public int id;
-    public List<SubTasks> subtasks;
+    private int id;
+    private String status;
+    private String description;
 
-    public Tasks(){
 
-    }
-
-    public Tasks(int id, List<SubTasks> subtasks){
+    public Tasks(int id, String description, String status){
         this.id = id;
-        this.subtasks = subtasks;
+        this.status = status;
+        this.description = description;
     }
 
     public int getId() {
@@ -27,32 +24,19 @@ public class Tasks {
         this.id = id;
     }
 
-    public List<SubTasks> getSubtasks() {
-        return subtasks;
+    public String getStatus() {
+        return status;
     }
 
-    public void setSubtasks(List<SubTasks> subtasks) {
-        this.subtasks = subtasks;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public class SubTasks {
-        public String status;
-        public String description;
+    public String getDescription() {
+        return description;
+    }
 
-        public String getStatus() {
-            return status;
-        }
-
-        public void setStatus(String status) {
-            this.status = status;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

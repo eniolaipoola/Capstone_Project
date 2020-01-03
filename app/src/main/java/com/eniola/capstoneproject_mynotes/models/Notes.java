@@ -1,14 +1,13 @@
 package com.eniola.capstoneproject_mynotes.models;
 
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
-/**
- * Copyright (c) 2019 Eniola Ipoola
- * All rights reserved
- * Created on 29-Dec-2019
- */
 @IgnoreExtraProperties
-public class Notes {
+public class Notes implements Serializable {
 
     private String title;
     private String date_created;
@@ -22,6 +21,17 @@ public class Notes {
         this.date_created = date_created;
         this.content = content;
         this.userEmail = userEmail;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("title", title);
+        result.put("date_created", date_created);
+        result.put("content", content);
+        result.put("userEmail", userEmail);
+
+        return result;
     }
 
     public String getTitle() {

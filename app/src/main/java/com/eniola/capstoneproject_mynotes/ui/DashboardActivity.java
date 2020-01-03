@@ -14,12 +14,11 @@ import com.eniola.capstoneproject_mynotes.ui.fragments.NoteFragment;
 import com.eniola.capstoneproject_mynotes.ui.fragments.HomeFragment;
 import com.eniola.capstoneproject_mynotes.ui.fragments.SettingsFragment;
 import com.eniola.capstoneproject_mynotes.ui.fragments.TaskFragment;
-import com.eniola.capstoneproject_mynotes.ui.fragments.dummy.DummyContent;
 import com.eniola.capstoneproject_mynotes.utilities.AppConstant;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class DashboardActivity extends AppCompatActivity  implements BottomNavigationView.OnNavigationItemSelectedListener,
-        TaskFragment.OnListFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener {
+        SettingsFragment.OnFragmentInteractionListener {
 
     ActivityDashboardBinding dashboardActivityBinding;
 
@@ -107,14 +106,4 @@ public class DashboardActivity extends AppCompatActivity  implements BottomNavig
     public void onFragmentInteraction(Uri uri) {
 
     }
-
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
-    }
-
-    /*public String getDeviceId(){
-        TelephonyManager telephonyManager = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
-        String deviceId = telephonyManager.getDeviceId();
-    }*/
 }

@@ -15,8 +15,6 @@ import android.view.ViewGroup;
 import com.eniola.capstoneproject_mynotes.models.Notes;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.FragmentNoteBinding;
-
-
 import com.eniola.capstoneproject_mynotes.models.User;
 import com.eniola.capstoneproject_mynotes.ui.CreateNoteActivity;
 import com.eniola.capstoneproject_mynotes.ui.adapters.NotesAdapter;
@@ -38,7 +36,7 @@ public class NoteFragment extends Fragment {
     public NoteFragment() {}
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         fragmentNoteBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_note, container, false);
         View rootView = fragmentNoteBinding.getRoot();
@@ -56,7 +54,7 @@ public class NoteFragment extends Fragment {
                     notes = snapshot.getValue(Notes.class);
                     if(notes != null){
                         notesFromFirebase.add(notes);
-                        notesAdapter = new NotesAdapter(notesFromFirebase);
+                        notesAdapter = new NotesAdapter(notesFromFirebase, getActivity());
                         notesAdapter.notifyDataSetChanged();
                         //add data to recycler-view adapter
                         fragmentNoteBinding.homeNoteRecyclerView.setAdapter(notesAdapter);
@@ -69,7 +67,6 @@ public class NoteFragment extends Fragment {
                 Log.d(AppConstant.DEBUG_TAG, "An error occurred when trying to fetch data from firebase " + notesFromFirebase.size());
             }
         });
-
 
         //bind recycler-view to view
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager

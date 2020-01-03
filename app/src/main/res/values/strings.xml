@@ -18,8 +18,10 @@
 
     <!--Tasks related strings-->
     <string name="view_tasks">View Tasks</string>
-    <string name="task_title">Task Title</string>
+    <string name="all_tasks">All Tasks</string>
     <string name="create_task">Create Task</string>
+    <string name="new_task">Enter Task Description</string>
+    <string name="done">Done</string>
     <string name="task_list_item">Task Details</string>
 
     <!-- User Profile Strings-->

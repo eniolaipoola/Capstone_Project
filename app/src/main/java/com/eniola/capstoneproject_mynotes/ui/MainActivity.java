@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     email = firebaseUser.getEmail();
                     Log.d(AppConstant.DEBUG_TAG, "USER EMAIL IS " + email);
                     Log.d(AppConstant.DEBUG_TAG, "USER name IS " + username);
-                    Toast.makeText(MainActivity.this, "You are currently signed in ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "You are currently signed in ", Toast.LENGTH_SHORT).show();
 
                     //save user details in shared preference
                     sharedPreferenceBaseClass.editPreference(AppConstant.APP_MAIN_PREFERENCE, AppConstant.USER_EMAIL, email);
