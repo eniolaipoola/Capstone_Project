@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     SharedPreferenceBaseClass sharedPreferenceBaseClass;
     private String username, email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
+        sharedPreferenceBaseClass = new SharedPreferenceBaseClass(this);
 
 
         final int SPLASH_SCREEN_TIME_DURATION = 1000;
@@ -58,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "You are currently signed in ", Toast.LENGTH_LONG).show();
 
                     //save user details in shared preference
-                    //sharedPreferenceBaseClass.editPreference(AppConstant.APP_MAIN_PREFERENCE, AppConstant.USER_EMAIL, true);
+                    sharedPreferenceBaseClass.editPreference(AppConstant.APP_MAIN_PREFERENCE, AppConstant.USER_EMAIL, email);
+                    sharedPreferenceBaseClass.editPreference(AppConstant.APP_MAIN_PREFERENCE, AppConstant.USERNAME, username);
 
 
                 } else {

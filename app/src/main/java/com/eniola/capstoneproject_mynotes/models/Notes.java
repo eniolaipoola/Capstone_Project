@@ -10,20 +10,19 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class Notes {
 
-    public String title;
-    public String date_created;
-    public String content;
+    private String title;
+    private String date_created;
+    private String content;
+    private String userEmail;
 
-    public Notes(){
+    public Notes(){}
 
-    }
-
-    public Notes(String title, String date_created, String content){
+    public Notes(String userEmail, String title, String content, String date_created){
         this.title = title;
         this.date_created = date_created;
         this.content = content;
+        this.userEmail = userEmail;
     }
-
 
     public String getTitle() {
         return title;
@@ -47,5 +46,13 @@ public class Notes {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }

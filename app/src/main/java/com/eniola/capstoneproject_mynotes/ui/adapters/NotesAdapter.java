@@ -10,18 +10,12 @@ import com.eniola.capstoneproject_mynotes.models.Notes;
 import com.eniola.capstoneproject_mynotes.utilities.AppConstant;
 import java.util.List;
 
-/**
- * Copyright (c) 2019 Eniola Ipoola
- * All rights reserved
- * Created on 30-Dec-2019
- */
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> {
 
     private List<Notes> allNotes;
 
     public NotesAdapter(List<Notes> firebaseNotes){
         this.allNotes = firebaseNotes;
-        Log.d(AppConstant.DEBUG_TAG, "notes data in adapter is " + allNotes.size());
     }
 
     @NonNull
@@ -57,14 +51,18 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
             String date_created = notes.getDate_created();
             String content = notes.getContent();
 
-            Log.d(AppConstant.DEBUG_TAG, " title in binding data to view " + notes.getTitle());
-            Log.d(AppConstant.DEBUG_TAG, " " + date_created);
-            Log.d(AppConstant.DEBUG_TAG, " " + content);
+            Log.d(AppConstant.DEBUG_TAG, "Content is " + content);
 
             itemHomeNoteBinding.noteTitleTextView.setText(title);
             itemHomeNoteBinding.noteCreatedDateTextView.setText(date_created);
             itemHomeNoteBinding.noteContentTextView.setText(content);
 
+            /*itemHomeNoteBinding.noteCardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    noteClickedListener.onNoteClicked(notes);
+                }
+            });*/
         }
 
     }

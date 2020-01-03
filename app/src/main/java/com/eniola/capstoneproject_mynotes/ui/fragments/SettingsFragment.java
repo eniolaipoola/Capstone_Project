@@ -6,27 +6,17 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.FragmentSettingsBinding;
-import com.eniola.capstoneproject_mynotes.utilities.AppConstant;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.eniola.capstoneproject_mynotes.models.User;
 
 public class SettingsFragment extends Fragment {
-
-    OnFragmentInteractionListener mListener;
-    FragmentSettingsBinding fragmentSettingsBinding;
-    FirebaseAuth.AuthStateListener authStateListener;
-    FirebaseAuth firebaseAuth;
-    private String username, email;
 
     public SettingsFragment() {}
 
@@ -42,29 +32,13 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        fragmentSettingsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false);
+        FragmentSettingsBinding fragmentSettingsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false);
         View rootView = fragmentSettingsBinding.getRoot();
 
         //fetch user details from shared preference
-
-        /*firebaseAuth = FirebaseAuth.getInstance();
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                Log.d(AppConstant.DEBUG_TAG, "it got here in settings");
-                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                if(firebaseUser != null){
-                    //user is signed in
-                    username = firebaseUser.getDisplayName();
-                    email = firebaseUser.getEmail();
-                    fragmentSettingsBinding.userEmail.setText(email);
-                    fragmentSettingsBinding.username.setText(username);
-                    Log.d(AppConstant.DEBUG_TAG, "USER EMAIL IS " + email);
-                    Log.d(AppConstant.DEBUG_TAG, "USER name IS " + username);
-                    Toast.makeText(getActivity(), "You are currently signed in ", Toast.LENGTH_LONG).show();
-                }
-            }
-        };*/
+        User user = new User(getActivity());
+        fragmentSettingsBinding.username.setText(user.getUsername());
+        fragmentSettingsBinding.userEmail.setText(user.getEmail());
 
         //populate all spinners in settings page
         Spinner font_spinner = fragmentSettingsBinding.fontStyleSpinner;
@@ -129,7 +103,7 @@ public class SettingsFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -139,7 +113,6 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     public interface OnFragmentInteractionListener {

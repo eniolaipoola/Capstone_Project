@@ -7,6 +7,7 @@ import com.eniola.capstoneproject_mynotes.models.Notes;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.ActivityCreateNoteBinding;
 import com.eniola.capstoneproject_mynotes.utilities.AppConstant;
+import com.eniola.capstoneproject_mynotes.utilities.SharedPreferenceBaseClass;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,6 +27,7 @@ public class CreateNoteActivity extends AppCompatActivity {
     String noteTitle;
     String noteContent;
     String noteCreatedDateTime;
+    SharedPreferenceBaseClass sharedPreferenceBaseClass;
 
     //Start using the database
     private FirebaseDatabase mFirebaseDatabase;
@@ -37,6 +39,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         activityCreateNoteBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_note);
         Toolbar toolbar = activityCreateNoteBinding.toolbar;
         setSupportActionBar(toolbar);
+        sharedPreferenceBaseClass = new SharedPreferenceBaseClass(this);
 
         //get current time and date and display as note creation time
         noteCreatedDateTime = DateFormat.getDateTimeInstance().format(new Date());
@@ -57,7 +60,8 @@ public class CreateNoteActivity extends AppCompatActivity {
                 mDatabaseReference = mFirebaseDatabase.getReference();
 
                 //attempt to save note data to firebase database
-                writeNewNote(noteTitle, noteCreatedDateTime, noteContent);
+                String username = sharedPreferenceBaseClass.loadPreference(AppConstant.APP_MAIN_PREFERENCE).getString(AppConstant.USERNAME, "");
+                writeNewNote(username, noteTitle, noteCreatedDateTime, noteContent);
 
                 //Go back to home page
                 Intent intent = new Intent(CreateNoteActivity.this, DashboardActivity.class);
@@ -66,9 +70,9 @@ public class CreateNoteActivity extends AppCompatActivity {
         });
     }
 
-    private void writeNewNote(String title, String date_created, String content){
-        Notes notes = new Notes(title, date_created, content);
-        mDatabaseReference.child("notes").push().setValue(notes).addOnSuccessListener(new OnSuccessListener<Void>() {
+    private void writeNewNote(String username, String title, String content, String date_created){
+        Notes notes = new Notes(username, title, date_created, content);
+        mDatabaseReference.child("notes").child(username).push().setValue(notes).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.d(AppConstant.DEBUG_TAG, "The saving of data to firebase is successful");
@@ -80,5 +84,4 @@ public class CreateNoteActivity extends AppCompatActivity {
             }
         });
     }
-
 }
