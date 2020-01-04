@@ -3,13 +3,13 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         release {
-            storeFile file('/Users/Scientist/AndroidAPKs/keystore')
+            storeFile file("$rootDir/keystore")
             storePassword 'eniola11'
             keyAlias = 'key0'
             keyPassword 'en1ola'
         }
         debug {
-            storeFile file('/Users/Scientist/AndroidAPKs/keystore')
+            storeFile file("$rootDir/keystore")
             storePassword 'eniola11'
             keyAlias = 'key0'
             keyPassword 'en1ola'
@@ -25,6 +25,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
+        signingConfig signingConfigs.debug
     }
 
     buildTypes {
