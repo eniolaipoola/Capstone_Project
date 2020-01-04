@@ -2,8 +2,10 @@ package com.eniola.capstoneproject_mynotes.ui.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import com.eniola.capstoneproject_mynotes.databinding.ItemTaskBinding;
 import com.eniola.capstoneproject_mynotes.models.Tasks;
 import java.util.List;
@@ -45,8 +47,22 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         }
 
         private void bindDataToView(final Tasks currentTask){
-            String taskDescription = currentTask.getDescription();
+            final String taskDescription = currentTask.getDescription();
             itemTaskBinding.taskDescription.setText(taskDescription);
+            itemTaskBinding.taskStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(itemTaskBinding.taskStatus.isChecked()){
+                        //update task status
+                        currentTask.setStatus("done");
+                        if(currentTask.getStatus().equals("done")){
+                            itemTaskBinding.taskDescription.setPaintFlags(
+                                    itemTaskBinding.taskDescription.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG
+                            );
+                        }
+                    }
+                }
+            });
         }
     }
 }

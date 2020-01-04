@@ -46,4 +46,6 @@
     <string name="sort_notes_by">Sort Notes By</string>
     <string name="date_created">Date Created</string>
     <string name="sort_tasks_by">Sort Tasks By</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

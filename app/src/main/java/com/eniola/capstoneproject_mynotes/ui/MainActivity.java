@@ -35,18 +35,6 @@ public class MainActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         sharedPreferenceBaseClass = new SharedPreferenceBaseClass(this);
-
-
-        final int SPLASH_SCREEN_TIME_DURATION = 1000;
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(MainActivity.this, DashboardActivity.class));
-                finish();
-            }
-        }, SPLASH_SCREEN_TIME_DURATION);
-
-
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -55,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
                     //user is signed in
                     username = firebaseUser.getDisplayName();
                     email = firebaseUser.getEmail();
-                    Log.d(AppConstant.DEBUG_TAG, "USER EMAIL IS " + email);
-                    Log.d(AppConstant.DEBUG_TAG, "USER name IS " + username);
                     Toast.makeText(MainActivity.this, "You are currently signed in ", Toast.LENGTH_SHORT).show();
 
                     //save user details in shared preference
@@ -78,6 +64,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
+
+        final int SPLASH_SCREEN_TIME_DURATION = 1000;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(MainActivity.this, DashboardActivity.class));
+                finish();
+            }
+        }, SPLASH_SCREEN_TIME_DURATION);
+
     }
 
     @Override

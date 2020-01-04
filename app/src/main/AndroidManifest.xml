@@ -12,7 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.CreateTaskActivity"></activity>
+        <activity android:name=".paid.CreateTaskActivity"></activity>
+        <activity android:name=".free.CreateTaskActivity" />
+
+        <receiver android:name=".MyNotesWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/my_notes_widget_provider_info" />
+        </receiver>
+
         <activity android:name=".ui.CreateNoteActivity" />
         <activity
             android:name=".ui.DashboardActivity"

@@ -1,24 +1,19 @@
 package com.eniola.capstoneproject_mynotes.ui.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.FragmentTaskBinding;
+import com.eniola.capstoneproject_mynotes.free.CreateTaskActivity;
 import com.eniola.capstoneproject_mynotes.models.Tasks;
-import com.eniola.capstoneproject_mynotes.ui.CreateTaskActivity;
 import com.eniola.capstoneproject_mynotes.ui.adapters.TaskAdapter;
 import com.eniola.capstoneproject_mynotes.utilities.AppConstant;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +25,6 @@ import java.util.ArrayList;
 
 public class TaskFragment extends Fragment {
 
-    private int mColumnCount = 1;
     Tasks tasks;
     private ArrayList<Tasks> tasksFromFirebase;
     private TaskAdapter taskAdapter;

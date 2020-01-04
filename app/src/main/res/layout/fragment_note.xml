@@ -29,7 +29,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/fragment_vertical_margin"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/notes_text_view"  />
+                app:layout_constraintTop_toBottomOf="@+id/notes_text_view"
+                android:scrollbars="vertical"
+                android:focusable="true"
+                android:descendantFocusability="afterDescendants" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/share_fab"
@@ -45,6 +48,5 @@
                 android:elevation="@dimen/fab_elevation"
                 android:contentDescription="@string/action_add" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </ScrollView>
 </layout>

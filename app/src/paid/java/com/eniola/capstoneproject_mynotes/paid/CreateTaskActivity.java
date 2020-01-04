@@ -1,10 +1,8 @@
-package com.eniola.capstoneproject_mynotes.ui;
+package com.eniola.capstoneproject_mynotes.paid;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +12,7 @@ import android.widget.Toast;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.ActivityCreateTaskBinding;
 import com.eniola.capstoneproject_mynotes.models.Tasks;
+import com.eniola.capstoneproject_mynotes.ui.DashboardActivity;
 import com.eniola.capstoneproject_mynotes.utilities.AppConstant;
 import com.eniola.capstoneproject_mynotes.utilities.SharedPreferenceBaseClass;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -22,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateTaskActivity extends AppCompatActivity {
+
     ActivityCreateTaskBinding activityCreateTaskBinding;
     String taskDescription;
     EditText taskDescriptionEditText;

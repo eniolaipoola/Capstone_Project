@@ -26,6 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fragment_horizontal_margin"
             app:layout_constraintStart_toStartOf="parent"
+            android:scrollbars="vertical"
+            android:focusable="true"
+            android:descendantFocusability="afterDescendants"
             app:layout_constraintTop_toBottomOf="@+id/tasks_text_view"  />
 
         <FrameLayout
