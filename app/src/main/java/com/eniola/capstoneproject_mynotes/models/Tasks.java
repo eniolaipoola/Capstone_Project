@@ -2,57 +2,51 @@ package com.eniola.capstoneproject_mynotes.models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
-import java.util.List;
-
 @IgnoreExtraProperties
 public class Tasks {
 
-    public int id;
-    public List<SubTasks> subtasks;
+    private String id;
+    private String status;
+    private String description;
+    private String username;
 
-    public Tasks(){
-
+    public Tasks(String username, String description, String status){
+        this.status = status;
+        this.description = description;
+        this.username = username;
     }
 
-    public Tasks(int id, List<SubTasks> subtasks){
-        this.id = id;
-        this.subtasks = subtasks;
-    }
+    public Tasks(){}
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public List<SubTasks> getSubtasks() {
-        return subtasks;
+    public String getStatus() {
+        return status;
     }
 
-    public void setSubtasks(List<SubTasks> subtasks) {
-        this.subtasks = subtasks;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public class SubTasks {
-        public String status;
-        public String description;
+    public String getDescription() {
+        return description;
+    }
 
-        public String getStatus() {
-            return status;
-        }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-        public void setStatus(String status) {
-            this.status = status;
-        }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
+    public String getUsername() {
+        return username;
     }
 }

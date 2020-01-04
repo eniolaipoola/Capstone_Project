@@ -3,6 +3,7 @@
     package="com.eniola.capstoneproject_mynotes">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.CreateTaskActivity"/>
+        <activity android:name=".paid.CreateTaskActivity"></activity>
+        <activity android:name=".free.CreateTaskActivity" />
+
+        <receiver android:name=".MyNotesWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/my_notes_widget_provider_info" />
+        </receiver>
+
         <activity android:name=".ui.CreateNoteActivity" />
         <activity
             android:name=".ui.DashboardActivity"
@@ -20,14 +33,7 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-4804094542707781~1103551078" />
-
-        <activity
-            android:name=".ui.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

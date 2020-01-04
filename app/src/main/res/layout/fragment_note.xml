@@ -6,7 +6,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -29,7 +29,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/fragment_vertical_margin"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/notes_text_view"  />
+                app:layout_constraintTop_toBottomOf="@+id/notes_text_view"
+                android:scrollbars="vertical"
+                android:focusable="true"
+                android:descendantFocusability="afterDescendants" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/share_fab"
@@ -38,8 +41,10 @@
                 android:layout_height="56dp"
                 android:src="@drawable/ic_add"
                 android:layout_margin="@dimen/fab_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/home_note_recycler_view"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="32dp"
                 android:elevation="@dimen/fab_elevation"
                 android:contentDescription="@string/action_add" />
         </androidx.constraintlayout.widget.ConstraintLayout>

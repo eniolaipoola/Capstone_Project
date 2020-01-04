@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.eniola.capstoneproject_mynotes.models.Notes;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.FragmentNoteBinding;
+import com.eniola.capstoneproject_mynotes.models.User;
 import com.eniola.capstoneproject_mynotes.ui.CreateNoteActivity;
 import com.eniola.capstoneproject_mynotes.ui.adapters.NotesAdapter;
 import com.eniola.capstoneproject_mynotes.utilities.AppConstant;
@@ -27,9 +28,6 @@ import java.util.ArrayList;
 
 public class NoteFragment extends Fragment {
 
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mDatabaseReference;
-    private StaggeredGridLayoutManager staggeredGridLayoutManager;
     private NotesAdapter notesAdapter;
     private ArrayList<Notes> notesFromFirebase;
     private FragmentNoteBinding fragmentNoteBinding;
@@ -38,34 +36,32 @@ public class NoteFragment extends Fragment {
     public NoteFragment() {}
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         fragmentNoteBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_note, container, false);
         View rootView = fragmentNoteBinding.getRoot();
 
         notesFromFirebase = new ArrayList<>();
+        User user = new User(getActivity());
 
-        //bind recyclerview to view
-        staggeredGridLayoutManager = new StaggeredGridLayoutManager(calculateNumberOfColumns(getActivity()), StaggeredGridLayoutManager.VERTICAL);
-        fragmentNoteBinding.homeNoteRecyclerView.setLayoutManager(staggeredGridLayoutManager);
-        fragmentNoteBinding.homeNoteRecyclerView.setHasFixedSize(true);
-
-        //retrieve saved notes, if any
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference().child("notes");
+        //retrieve users specific saved notes, if any
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference().child("notes").child(user.getUsername());
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     notes = snapshot.getValue(Notes.class);
-                    notesFromFirebase.add(notes);
+                    String noteId = dataSnapshot.getKey();
+                    notes.setId(noteId);
+                    if(notes != null){
+                        notesFromFirebase.add(notes);
+                        notesAdapter = new NotesAdapter(notesFromFirebase, getActivity());
+                        notesAdapter.notifyDataSetChanged();
+                        //add data to recycler-view adapter
+                        fragmentNoteBinding.homeNoteRecyclerView.setAdapter(notesAdapter);
+                    }
                 }
-
-                notesAdapter = new NotesAdapter(notesFromFirebase);
-                notesAdapter.notifyDataSetChanged();
-
-                //add data to recyclerview adapter
-                fragmentNoteBinding.homeNoteRecyclerView.setAdapter(notesAdapter);
             }
 
             @Override
@@ -73,6 +69,12 @@ public class NoteFragment extends Fragment {
                 Log.d(AppConstant.DEBUG_TAG, "An error occurred when trying to fetch data from firebase " + notesFromFirebase.size());
             }
         });
+
+        //bind recycler-view to view
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager
+                (calculateNumberOfColumns(getActivity()), StaggeredGridLayoutManager.VERTICAL);
+        fragmentNoteBinding.homeNoteRecyclerView.setLayoutManager(staggeredGridLayoutManager);
+        fragmentNoteBinding.homeNoteRecyclerView.setHasFixedSize(true);
 
         // create view for a new note
         fragmentNoteBinding.shareFab.setOnClickListener(new View.OnClickListener() {

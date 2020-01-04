@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/create_task_feature"
+            android:layout_width="350dp"
+            android:layout_height="170dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/enter_task"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="16dp"
+                android:hint="@string/new_task"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:inputType="text"
+                android:background="@android:color/transparent"
+                tools:ignore="Autofill"/>
+
+            <TextView
+                android:id="@+id/done_creating_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_margin="24dp"
+                android:hint="@string/done"
+                app:layout_constraintTop_toBottomOf="@+id/enter_task"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@android:color/transparent"
+                tools:ignore="Autofill"/>
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/done_creating_task"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="16dp"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/app_add_unit_id"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorWhite">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <CheckBox
-        android:id="@+id/task_status"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_margin="16dp" />
-
-    <TextView
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/task_list_item"
-        android:gravity="center"
-        android:layout_margin="16dp"
-        android:textAppearance="?android:textAppearanceMedium"/>
+        android:background="@color/colorWhite">
 
-</LinearLayout>
+        <CheckBox
+            android:id="@+id/task_status"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_margin="16dp" />
+
+        <TextView
+            android:id="@+id/task_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/task_list_item"
+            android:gravity="start"
+            android:layout_margin="16dp"
+            android:textAppearance="?android:textAppearanceMedium"/>
+    </LinearLayout>
+
+</layout>

@@ -2,65 +2,67 @@ package com.eniola.capstoneproject_mynotes.ui.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import com.eniola.capstoneproject_mynotes.R;
-import com.eniola.capstoneproject_mynotes.ui.fragments.TaskFragment.OnListFragmentInteractionListener;
-import com.eniola.capstoneproject_mynotes.ui.fragments.dummy.DummyContent.DummyItem;
+import android.widget.CompoundButton;
+import com.eniola.capstoneproject_mynotes.databinding.ItemTaskBinding;
+import com.eniola.capstoneproject_mynotes.models.Tasks;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private List<Tasks> taskItem;
 
-    public TaskAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
-        mListener = listener;
+    public TaskAdapter(List<Tasks> taskItems) {
+        this.taskItem = taskItems;
     }
 
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_task, parent, false);
-        return new ViewHolder(view);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        ItemTaskBinding itemTaskBinding = ItemTaskBinding.inflate(layoutInflater, parent, false);
+        return new TaskAdapter.ViewHolder(itemTaskBinding);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
-            }
-        });
+        final Tasks tasks = taskItem.get(position);
+        holder.bindDataToView(tasks);
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return taskItem.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public DummyItem mItem;
 
-        public ViewHolder(View view) {
-            super(view);
-            mView = view;
+        private final ItemTaskBinding itemTaskBinding;
+
+        public ViewHolder(ItemTaskBinding itemTaskBinding) {
+            super(itemTaskBinding.getRoot());
+            this.itemTaskBinding = itemTaskBinding;
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '"  + "'";
+        private void bindDataToView(final Tasks currentTask){
+            final String taskDescription = currentTask.getDescription();
+            itemTaskBinding.taskDescription.setText(taskDescription);
+            itemTaskBinding.taskStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(itemTaskBinding.taskStatus.isChecked()){
+                        //update task status
+                        currentTask.setStatus("done");
+                        if(currentTask.getStatus().equals("done")){
+                            itemTaskBinding.taskDescription.setPaintFlags(
+                                    itemTaskBinding.taskDescription.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG
+                            );
+                        }
+                    }
+                }
+            });
         }
     }
 }

@@ -2,7 +2,6 @@ package com.eniola.capstoneproject_mynotes.ui;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,15 +10,13 @@ import androidx.fragment.app.FragmentTransaction;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.ActivityDashboardBinding;
 import com.eniola.capstoneproject_mynotes.ui.fragments.NoteFragment;
-import com.eniola.capstoneproject_mynotes.free.HomeFragment;
+import com.eniola.capstoneproject_mynotes.ui.fragments.HomeFragment;
 import com.eniola.capstoneproject_mynotes.ui.fragments.SettingsFragment;
 import com.eniola.capstoneproject_mynotes.ui.fragments.TaskFragment;
-import com.eniola.capstoneproject_mynotes.ui.fragments.dummy.DummyContent;
-import com.eniola.capstoneproject_mynotes.utilities.AppConstant;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class DashboardActivity extends AppCompatActivity  implements BottomNavigationView.OnNavigationItemSelectedListener,
-        TaskFragment.OnListFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener {
+        SettingsFragment.OnFragmentInteractionListener {
 
     ActivityDashboardBinding dashboardActivityBinding;
 
@@ -27,37 +24,27 @@ public class DashboardActivity extends AppCompatActivity  implements BottomNavig
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dashboardActivityBinding = DataBindingUtil.setContentView(DashboardActivity.this, R.layout.activity_dashboard);
-        getHomeFragment();
+        getNoteFragment();
 
         //initialize bottomview navigation bar
         BottomNavigationView bottomNavigationView =  dashboardActivityBinding.bottomNavigationView;
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-
-            case R.id.navigation_notes:
-                getNoteFragment();
-                Log.d(AppConstant.DEBUG_TAG, "This is the notes fragment");
-                break;
-
             case R.id.navigation_tasks:
                 getTaskFragment();
-                Log.d(AppConstant.DEBUG_TAG, "This is the tasks fragment");
                 break;
 
             case R.id.navigation_settings:
                 getSettingsFragment();
-                Log.d(AppConstant.DEBUG_TAG, "This is the settings fragment");
                 break;
 
-                default:
-                    getHomeFragment();
-                    Log.d(AppConstant.DEBUG_TAG, "This is the home fragment");
-                    break;
+            default:
+                getNoteFragment();
+                break;
         }
 
         return true;
@@ -104,12 +91,5 @@ public class DashboardActivity extends AppCompatActivity  implements BottomNavig
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
-    }
+    public void onFragmentInteraction(Uri uri) {}
 }

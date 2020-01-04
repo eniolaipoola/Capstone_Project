@@ -1,27 +1,28 @@
 package com.eniola.capstoneproject_mynotes.ui.adapters;
 
-import android.util.Log;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.eniola.capstoneproject_mynotes.databinding.ItemNoteBinding;
 import com.eniola.capstoneproject_mynotes.models.Notes;
-import com.eniola.capstoneproject_mynotes.utilities.AppConstant;
+import com.eniola.capstoneproject_mynotes.models.OnNoteClickedListener;
+import com.eniola.capstoneproject_mynotes.ui.CreateNoteActivity;
 import java.util.List;
 
-/**
- * Copyright (c) 2019 Eniola Ipoola
- * All rights reserved
- * Created on 30-Dec-2019
- */
-public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> {
+public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> implements OnNoteClickedListener {
 
     private List<Notes> allNotes;
+    private OnNoteClickedListener onNoteClickedListener;
+    private Context mContext;
 
-    public NotesAdapter(List<Notes> firebaseNotes){
+    public NotesAdapter(List<Notes> firebaseNotes, Context context){
         this.allNotes = firebaseNotes;
-        Log.d(AppConstant.DEBUG_TAG, "notes data in adapter is " + allNotes.size());
+        this.onNoteClickedListener = this;
+        this.mContext = context;
     }
 
     @NonNull
@@ -35,7 +36,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     @Override
     public void onBindViewHolder(@NonNull NotesViewHolder holder, int position) {
         final Notes notes = allNotes.get(position);
-        holder.bindDataToView(notes);
+        holder.bindDataToView(notes, onNoteClickedListener);
     }
 
     @Override
@@ -52,20 +53,29 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
             this.itemHomeNoteBinding = homeNoteBinding;
         }
 
-        private void bindDataToView(final Notes notes){
+        private void bindDataToView(final Notes notes, final OnNoteClickedListener noteClickedListener){
             String title = notes.getTitle();
+            String note_id = notes.getId();
             String date_created = notes.getDate_created();
             String content = notes.getContent();
-
-            Log.d(AppConstant.DEBUG_TAG, " title in binding data to view " + notes.getTitle());
-            Log.d(AppConstant.DEBUG_TAG, " " + date_created);
-            Log.d(AppConstant.DEBUG_TAG, " " + content);
 
             itemHomeNoteBinding.noteTitleTextView.setText(title);
             itemHomeNoteBinding.noteCreatedDateTextView.setText(date_created);
             itemHomeNoteBinding.noteContentTextView.setText(content);
-
+            itemHomeNoteBinding.noteCardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    noteClickedListener.onNoteClicked(notes, view);
+                }
+            });
         }
+    }
 
+    @Override
+    public void onNoteClicked(Notes notes, View view) {
+        //launch create Activity page and set details to current note details
+        Intent intent = new Intent(mContext, CreateNoteActivity.class);
+        intent.putExtra("Notes", notes);
+        view.getContext().startActivity(intent);
     }
 }

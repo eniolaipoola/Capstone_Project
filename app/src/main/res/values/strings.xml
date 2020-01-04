@@ -18,8 +18,34 @@
 
     <!--Tasks related strings-->
     <string name="view_tasks">View Tasks</string>
-    <string name="task_title">Task Title</string>
+    <string name="all_tasks">All Tasks</string>
     <string name="create_task">Create Task</string>
+    <string name="new_task">Enter Task Description</string>
+    <string name="done">Done</string>
     <string name="task_list_item">Task Details</string>
 
+    <!-- User Profile Strings-->
+    <string name="profile_image">User Profile Image</string>
+    <string name="user_email">testemail@gmail.com</string>
+    <string name="user_name">Test Email</string>
+    <string name="style">STYLE</string>
+    <string name="fonts">Fonts</string>
+
+    <string name="font_style">Select Font Style</string>
+    <string-array name="font_style_array">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
+
+    <string-array name="sort_note_array">
+        <item>Date Created</item>
+        <item>Date Modified</item>
+    </string-array>
+
+    <string name="sort_notes_by">Sort Notes By</string>
+    <string name="date_created">Date Created</string>
+    <string name="sort_tasks_by">Sort Tasks By</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

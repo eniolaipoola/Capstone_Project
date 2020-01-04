@@ -9,13 +9,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.FragmentSettingsBinding;
+import com.eniola.capstoneproject_mynotes.models.User;
 
 public class SettingsFragment extends Fragment {
-
-    public OnFragmentInteractionListener mListener;
-    public FragmentSettingsBinding fragmentSettingsBinding;
 
     public SettingsFragment() {}
 
@@ -29,11 +30,70 @@ public class SettingsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        fragmentSettingsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false);
+        FragmentSettingsBinding fragmentSettingsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false);
         View rootView = fragmentSettingsBinding.getRoot();
 
+        //fetch user details from shared preference
+        User user = new User(getActivity());
+        fragmentSettingsBinding.username.setText(user.getUsername());
+        fragmentSettingsBinding.userEmail.setText(user.getEmail());
+
+        //populate all spinners in settings page
+        Spinner font_spinner = fragmentSettingsBinding.fontStyleSpinner;
+        ArrayAdapter<String> fontArrayAdapter = new ArrayAdapter(getActivity(),
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.font_style_array));
+        fontArrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        font_spinner.setAdapter(fontArrayAdapter);
+
+        font_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        Spinner sort_note_spinner = fragmentSettingsBinding.noteDateCreatedSpinner;
+        ArrayAdapter<String> sortNotesAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.sort_note_array));
+        sortNotesAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        sort_note_spinner.setAdapter(sortNotesAdapter);
+
+        sort_note_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        Spinner sort_task_spinner = fragmentSettingsBinding.taskDateCreatedSpinner;
+        ArrayAdapter<String> sortTaskAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.sort_note_array));
+        sortTaskAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        sort_task_spinner.setAdapter(sortTaskAdapter);
+
+        sort_task_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         return rootView;
     }
@@ -43,7 +103,7 @@ public class SettingsFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -53,7 +113,6 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     public interface OnFragmentInteractionListener {

@@ -6,7 +6,9 @@ import android.os.Bundle;
 import com.eniola.capstoneproject_mynotes.models.Notes;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.ActivityCreateNoteBinding;
+import com.eniola.capstoneproject_mynotes.ui.fragments.NoteFragment;
 import com.eniola.capstoneproject_mynotes.utilities.AppConstant;
+import com.eniola.capstoneproject_mynotes.utilities.SharedPreferenceBaseClass;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -15,8 +17,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -26,6 +30,10 @@ public class CreateNoteActivity extends AppCompatActivity {
     String noteTitle;
     String noteContent;
     String noteCreatedDateTime;
+    SharedPreferenceBaseClass sharedPreferenceBaseClass;
+    FloatingActionButton floatingActionButton;
+    Notes notes;
+    String username;
 
     //Start using the database
     private FirebaseDatabase mFirebaseDatabase;
@@ -38,37 +46,57 @@ public class CreateNoteActivity extends AppCompatActivity {
         Toolbar toolbar = activityCreateNoteBinding.toolbar;
         setSupportActionBar(toolbar);
 
-        //get current time and date and display as note creation time
+        floatingActionButton = activityCreateNoteBinding.fab;
+        sharedPreferenceBaseClass = new SharedPreferenceBaseClass(this);
+        username = sharedPreferenceBaseClass.loadPreference(AppConstant.APP_MAIN_PREFERENCE).getString(AppConstant.USERNAME, "");
+        //fire up firebase instance
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference();
+
+        Intent intent = getIntent();
+        if(intent != null){
+            notes = (Notes) intent.getSerializableExtra("Notes");
+            if(notes != null){
+                //display current note for editing
+                activityCreateNoteBinding.noteTitle.setText(notes.getTitle());
+                activityCreateNoteBinding.noteContentEditText.setText(notes.getContent());
+                activityCreateNoteBinding.createdDateTextView.setText(notes.getDate_created());
+
+                floatingActionButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //update note details
+                        updateCurrentNote(notes);
+                        //Go back to note fragment page
+                        getNoteFragment();
+                    }
+                });
+            }
+        }
+
         noteCreatedDateTime = DateFormat.getDateTimeInstance().format(new Date());
         activityCreateNoteBinding.createdDateTextView.setText(noteCreatedDateTime);
-
-
-        FloatingActionButton fab = activityCreateNoteBinding.fab;
-        fab.setOnClickListener(new View.OnClickListener() {
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 //get note title and content
                 noteTitle = activityCreateNoteBinding.noteTitle.getText().toString();
                 noteContent = activityCreateNoteBinding.noteContentEditText.getText().toString();
 
-                //fire up firebase instance
-                mFirebaseDatabase = FirebaseDatabase.getInstance();
-                mDatabaseReference = mFirebaseDatabase.getReference();
-
-                //attempt to save note data to firebase database
-                writeNewNote(noteTitle, noteCreatedDateTime, noteContent);
+                //attempt to save note data to fire-base database
+                writeNewNote(username, noteTitle, noteCreatedDateTime, noteContent);
 
                 //Go back to home page
                 Intent intent = new Intent(CreateNoteActivity.this, DashboardActivity.class);
                 startActivity(intent);
+                Toast.makeText(CreateNoteActivity.this, "Note is successfully created", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void writeNewNote(String title, String date_created, String content){
-        Notes notes = new Notes(title, date_created, content);
-        mDatabaseReference.child("notes").push().setValue(notes).addOnSuccessListener(new OnSuccessListener<Void>() {
+    private void writeNewNote(String username, String title, String content, String dateCreated){
+        Notes notes = new Notes(username, title, dateCreated, content);
+        mDatabaseReference.child("notes").child(username).push().setValue(notes).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.d(AppConstant.DEBUG_TAG, "The saving of data to firebase is successful");
@@ -81,4 +109,17 @@ public class CreateNoteActivity extends AppCompatActivity {
         });
     }
 
+    private void updateCurrentNote(Notes notes){
+        String currentNoteId = notes.getId();
+        if(currentNoteId != null){
+            mDatabaseReference.child("notes").child(username).setValue(notes);
+        }
+    }
+
+    private void getNoteFragment(){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        NoteFragment noteFragment = NoteFragment.newInstance();
+        fragmentTransaction.replace(R.id.fragment_container, noteFragment).addToBackStack(null);
+        fragmentTransaction.commit();
+    }
 }
