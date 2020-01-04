@@ -13,4 +13,8 @@ public class AppConstant {
     public static final String USERNAME = "username";
     public static final String USER_EMAIL = "user_email";
     public static final String TASK_NEW = "new_task";
+    public static final String NOTE_CREATED = "Note is successfully created";
+    public static final String NOTES_SERIALIZABLE = "Notes";
+    public static final String NOTES = "notes";
+    public static final String Tasks = "tasks";
 }

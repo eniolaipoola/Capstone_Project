@@ -1,5 +1,7 @@
 package com.eniola.capstoneproject_mynotes.ui.fragments;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,7 +48,7 @@ public class NoteFragment extends Fragment {
 
         //retrieve users specific saved notes, if any
         FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference().child("notes").child(user.getUsername());
+        DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference().child(AppConstant.NOTES).child(user.getUsername());
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -66,7 +68,7 @@ public class NoteFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d(AppConstant.DEBUG_TAG, "An error occurred when trying to fetch data from firebase " + notesFromFirebase.size());
+                Log.d(AppConstant.DEBUG_TAG, getResources().getString(R.string.firebase_create_failed) + notesFromFirebase.size());
             }
         });
 

@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.FragmentTaskBinding;
-import com.eniola.capstoneproject_mynotes.free.CreateTaskActivity;
 import com.eniola.capstoneproject_mynotes.models.Tasks;
+import com.eniola.capstoneproject_mynotes.ui.CreateTaskActivity;
 import com.eniola.capstoneproject_mynotes.ui.adapters.TaskAdapter;
 import com.eniola.capstoneproject_mynotes.utilities.AppConstant;
 import com.google.firebase.database.DataSnapshot;
@@ -47,15 +47,9 @@ public class TaskFragment extends Fragment {
                 R.layout.fragment_task, container, false);
         View view = fragmentTaskBinding.getRoot();
 
-        //fetch bundle details
-        if(getArguments() != null){
-            String taskDescription = getArguments().getString("taskDescription");
-            Log.d(AppConstant.DEBUG_TAG, "task retrieved in task fragment is " + taskDescription);
-        }
-
         //retrieve users specific saved notes, if any
         FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference().child("tasks");
+        DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference().child(AppConstant.Tasks);
         tasksFromFirebase = new ArrayList<>();
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -74,7 +68,7 @@ public class TaskFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d(AppConstant.DEBUG_TAG, "An error occurred when trying to fetch data from firebase " + tasksFromFirebase.size());
+                Log.d(AppConstant.DEBUG_TAG, getResources().getString(R.string.firebase_create_failed) + databaseError);
             }
         });
 

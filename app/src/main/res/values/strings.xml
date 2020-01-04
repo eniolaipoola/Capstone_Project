@@ -23,6 +23,12 @@
     <string name="new_task">Enter Task Description</string>
     <string name="done">Done</string>
     <string name="task_list_item">Task Details</string>
+    <string name="task_create_success">Task is successfully created</string>
+    <string name="note_create_success">Note is successfully created</string>
+
+    <string name="fireebase_create_success">The saving of data to firebase is successful</string>
+    <string name="firebase_create_failed">The saving of data to firebase failed</string>
+    <string name="firebase_signin_status">You are currently signed in</string>
 
     <!-- User Profile Strings-->
     <string name="profile_image">User Profile Image</string>

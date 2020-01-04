@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.MainActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/note_splash_screen_image_view"
@@ -52,4 +49,4 @@
             app:layout_constraintTop_toBottomOf="@id/note_splash_screen_image_view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</layout>
+

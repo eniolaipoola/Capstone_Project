@@ -9,9 +9,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentTransaction;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.ActivityDashboardBinding;
+import com.eniola.capstoneproject_mynotes.free.SettingsFragment;
 import com.eniola.capstoneproject_mynotes.ui.fragments.NoteFragment;
 import com.eniola.capstoneproject_mynotes.ui.fragments.HomeFragment;
-import com.eniola.capstoneproject_mynotes.ui.fragments.SettingsFragment;
 import com.eniola.capstoneproject_mynotes.ui.fragments.TaskFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

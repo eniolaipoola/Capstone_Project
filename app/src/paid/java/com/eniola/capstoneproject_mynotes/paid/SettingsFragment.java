@@ -1,17 +1,17 @@
-package com.eniola.capstoneproject_mynotes.ui.fragments;
+package com.eniola.capstoneproject_mynotes.paid;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import com.eniola.capstoneproject_mynotes.R;
 import com.eniola.capstoneproject_mynotes.databinding.FragmentSettingsBinding;
 import com.eniola.capstoneproject_mynotes.models.User;
@@ -42,7 +42,7 @@ public class SettingsFragment extends Fragment {
 
         //populate all spinners in settings page
         Spinner font_spinner = fragmentSettingsBinding.fontStyleSpinner;
-        ArrayAdapter<String> fontArrayAdapter = new ArrayAdapter(getActivity(),
+        ArrayAdapter<String> fontArrayAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.font_style_array));
         fontArrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         font_spinner.setAdapter(fontArrayAdapter);
@@ -60,7 +60,7 @@ public class SettingsFragment extends Fragment {
         });
 
         Spinner sort_note_spinner = fragmentSettingsBinding.noteDateCreatedSpinner;
-        ArrayAdapter<String> sortNotesAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,
+        ArrayAdapter<String> sortNotesAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.sort_note_array));
         sortNotesAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         sort_note_spinner.setAdapter(sortNotesAdapter);
@@ -78,7 +78,7 @@ public class SettingsFragment extends Fragment {
         });
 
         Spinner sort_task_spinner = fragmentSettingsBinding.taskDateCreatedSpinner;
-        ArrayAdapter<String> sortTaskAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,
+        ArrayAdapter<String> sortTaskAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.sort_note_array));
         sortTaskAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         sort_task_spinner.setAdapter(sortTaskAdapter);
